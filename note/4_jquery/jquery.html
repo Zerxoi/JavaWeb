@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+</head>
+
+<body>
+    <form action="http://localhost:8080" method="get">
+        <input type="submit" value="Submit" class="submit">
+    </form>
+
+    <ul class="level-1">
+        <li class="item-i">I</li>
+        <li class="item-ii">II
+            <ul class="level-2">
+                <li class="item-a">A</li>
+                <li class="item-b">B
+                    <ul class="level-3">
+                        <li class="item-1"><a href="http://localhost:8080">1</a></li>
+                        <li class="item-2">2</li>
+                        <li class="item-3">3</li>
+                    </ul>
+                </li>
+                <li class="item-c">C</li>
+            </ul>
+        </li>
+        <li class="item-iii">III</li>
+    </ul>
+    <script src="jquery-3.5.1.js"></script>
+    <script>
+        // $(document).on("click", ".level-1", function (event) {
+        //     // 因为click事件绑定在 ul.level-1 元素上, 因此 this总是 ul.level-1 元素
+        //     console.log(this);
+        //     // event.target 是 click 事件发生的元素
+        //     console.log(event.target);
+        //     // event.stopPropagation();
+        //     // event.preventDefault();
+        //     return false;
+        // });
+        // $(".level-1").click(function () {
+        //     console.log(this);
+        // })
+        // $(".level-1 .item-1").click(function (e) {
+        //     console.log(this);
+        //     e.preventDefault();
+        // e.stopPropagation();
+        // return false;
+        // })
+        // document.querySelector(".level-1").addEventListener("click", function () {
+        //     console.log(this);
+        // })
+        // document.querySelector(".level-1 .item-1").addEventListener("click", function (e) {
+        //     console.log(this);
+        //     // e.preventDefault();
+        //     e.stopPropagation();
+        //     console.log(this);
+        // })
+        document.querySelector(".level-1").onclick = function (e) {
+            console.log(this);
+            console.log(e.target);
+        }
+        document.querySelector(".level-1 .item-1").onclick = function () {
+            console.log(this);
+            return false;
+        }
+
+        document.querySelector(".submit").onclick = function () {
+            console.log(this);
+            return false;
+        }
+
+        document.querySelector(".submit").addEventListener("click", function (e) {
+            console.log(this);
+            // e.preventDefault();
+            // e.stopPropagation();
+            return false;
+        })
+    </script>
+</body>
+
+</html>

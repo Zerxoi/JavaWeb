@@ -1,0 +1,140 @@
+body {
+    font-family: "Microsoft YaHei",Tahoma,Arial;
+    margin: 0;
+    height: 100%;
+}
+
+.page {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.comment-scroll, .tucao-scroll {
+    height: 100%;
+    /* overflow: scroll; */
+    overflow-x: hidden;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.comment {
+    direction: ltr;
+    width: 960px;
+}
+
+.comment .header, .tucao .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+.comment .header .author {
+    color: orangered;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.comment .header .date {
+    color: #CCC;
+    font-size: 12px;
+}
+
+.comment .header .id, .tucao .header .floor {
+    color: #c8c7cc;
+    font-size: 10px;
+}
+
+.comment .content {
+    padding: 1px 10px;
+}
+
+.comment .content img, .tucao .content img {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.comment .footer {
+    display: flex;
+    justify-content: space-between;
+    color: #c8c7cc;
+    font-size: 12px;
+    padding: 10px 10px;
+}
+
+.comment .footer span, .tucao .footer span{
+    margin: 0 3px;
+}
+
+.comment .footer .stat .read {
+    font-weight: bold;
+}
+
+.comment .footer .stat .score {
+    font-weight: bold;
+}
+
+.comment .oo, .tucao .oo {
+    color: #faa;
+    font-weight: bold;
+}
+
+.comment .xx, .tucao .xx {
+    color: #aaf;
+    font-weight: bold;
+}
+
+.comment .tucao {
+    color: #afa;
+    font-weight: bold;
+}
+
+.tucao {
+    width: 600px;
+}
+
+.tucao .tucaolist {
+    margin: 15px 0;
+    padding: 10px 0;
+}
+
+.tucao .hot-list {
+    border: 1px solid #e5e5e5;
+    background-color: #ffe;
+    border-bottom: 0;
+    margin: 10px 5px;
+}
+
+.tucao .hot-list .hot-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #444;
+    background-color: #e5e5e5;
+}
+
+.tucao .hot-list .hot-row, .tucao .tucao-list .tucao-row {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+
+.tucao .header .author {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tucao .content {
+    padding: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+.tucao .footer {
+    text-align: right;
+    color: #c8c7cc;
+    font-size: 12px;
+    padding: 5px 10px;
+}

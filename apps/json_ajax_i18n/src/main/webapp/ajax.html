@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>AJAX</title>
+</head>
+
+<body>
+	<button class="ajax_btn">ajax request</button>
+	<div id="div01">
+	</div>
+	<script type="text/javascript">
+		document.querySelector(".ajax_btn").addEventListener('click', ajaxRequest);
+
+		function ajaxRequest() {
+			var httpRequest = new XMLHttpRequest();
+			httpRequest.open("GET", "http://localhost:8080/json_ajax_i18n/ajaxServlet?action=ajax");
+			httpRequest.send();
+			httpRequest.onreadystatechange = function () {
+				if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					if (httpRequest.status === 200) {
+						var person = JSON.parse(httpRequest.responseText);
+						document.getElementById("div01").innerHTML = "编号："+ person.id + "， 姓名：" + person.name;
+					} else {
+						alert("There was a problem with the request");
+					}
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

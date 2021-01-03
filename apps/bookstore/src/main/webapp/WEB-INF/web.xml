@@ -1,0 +1,86 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <filter>
+    <filter-name>managerFilter</filter-name>
+    <filter-class>xyz.zerxoi.filter.ManagerFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>transactionFilter</filter-name>
+    <filter-class>xyz.zerxoi.filter.TransactionFilter</filter-class>
+  </filter>
+
+
+  <filter-mapping>
+    <filter-name>managerFilter</filter-name>
+    <url-pattern>/pages/manager/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>managerFilter</filter-name>
+    <url-pattern>/manager/bookServlet</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>transactionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>userServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.web.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>bookServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.web.BookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>clientBookServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.web.ClientBookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>kaptchaServlet</servlet-name>
+    <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>cartServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.web.CartServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>orderServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.web.OrderServlet</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>userServlet</servlet-name>
+    <url-pattern>/userServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>bookServlet</servlet-name>
+    <url-pattern>/manager/bookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>clientBookServlet</servlet-name>
+    <url-pattern>/client/bookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>kaptchaServlet</servlet-name>
+    <url-pattern>/kaptcha.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>cartServlet</servlet-name>
+    <url-pattern>/cartServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>orderServlet</servlet-name>
+    <url-pattern>/orderServlet</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/pages/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/pages/error/500.jsp</location>
+  </error-page>
+</web-app>

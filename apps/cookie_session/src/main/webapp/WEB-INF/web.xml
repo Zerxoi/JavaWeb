@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <servlet>
+    <servlet-name>cookieServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.servlet.CookieServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sessionServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.servlet.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cookieServlet</servlet-name>
+    <url-pattern>/cookieServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sessionServlet</servlet-name>
+    <url-pattern>/sessionServlet</url-pattern>
+  </servlet-mapping>
+
+
+  <session-config>
+    <session-timeout>20</session-timeout>
+  </session-config>
+</web-app>
