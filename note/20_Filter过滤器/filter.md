@@ -355,6 +355,8 @@ JSP Request: org.apache.catalina.connector.RequestFacade@64bc442c
 
 在**Servlet 容器中没有匹配的内置 Servlet**或者**没有注册与之匹配的 Servlet**的时候，默尔维尼路径的 Servlet 会被调用。需要注意的是默认路劲 `/` 的 `Servlet` 在访问 JSP 文件的时候不会被调用，因为 Servlet 容器中 url-pattern 为 `*.jsp` 的内置 Servlet 会被调用，其优先级大于默认路径。
 
+`<url-pattern>/*</url-pattern>`会将所有请求都发送到手动注册的 `Servlet` 程序中，但是如果访问 `*.html` 页面并不需要手动注册的 Servlet程序、访问 `*.jsp` 需要使用容器内置的 Servlet 而不是手动注册的 Servlet。所以相对于 `/*`，使用 `/` 是更安全的做法。
+
 ---
 
 注：
