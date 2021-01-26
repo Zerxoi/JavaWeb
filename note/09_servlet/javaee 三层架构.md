@@ -4,7 +4,11 @@
 
 ![JavaEE包结构](JavaEE包结构.png)
 
-参考：[MVC 与三层架构](https://juejin.cn/post/6844903479568252935)
+参考：
+
+[MVC 与三层架构](https://juejin.cn/post/6844903479568252935)
+
+[MVC设计模式](https://zhuanlan.zhihu.com/p/68424497)
 
 ## 三层架构
 

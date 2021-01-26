@@ -9,6 +9,14 @@
     <servlet-name>upload</servlet-name>
     <servlet-class>xyz.zerxoi.UploadServlet</servlet-class>
   </servlet>
+  <!-- <servlet>
+    <servlet-name>default</servlet-name>
+    <jsp-file>/500.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>all</servlet-name>
+    <jsp-file>/9-9Table.jsp</jsp-file>
+  </servlet> -->
   <servlet>
     <servlet-name>download</servlet-name>
     <servlet-class>xyz.zerxoi.DownloadServlet</servlet-class>
@@ -21,4 +29,12 @@
     <servlet-name>download</servlet-name>
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
+  <!-- <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>all</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping> -->
 </web-app>

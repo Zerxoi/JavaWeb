@@ -323,11 +323,15 @@ JSP Request: org.apache.catalina.connector.RequestFacade@64bc442c
 - A string containing only the `/` character indicates **the "default" servlet** of the application. In this case the servlet path is the request URI minus the context path and the path info is null.
 - All other strings are used for **exact matches** only.
 
+按找匹配的优先级排序如下
+
 1. 精确匹配
 
 ```xml
 <url-pattern>/target.jsp</url-pattern>
 ```
+
+因为 `/` 表示默认路径，所以不能用 `/` 表示上下文根路径。空字符串 `""` 会精确匹配上下文根路径。
 
 2. 目录匹配
 
@@ -342,6 +346,16 @@ JSP Request: org.apache.catalina.connector.RequestFacade@64bc442c
 ```
 
 后缀名匹配要以`*`开头
+
+4. 默认路径
+
+```xml
+<url-pattern>/</url-pattern>
+```
+
+在**Servlet 容器中没有匹配的内置 Servlet**或者**没有注册与之匹配的 Servlet**的时候，默尔维尼路径的 Servlet 会被调用。需要注意的是默认路劲 `/` 的 `Servlet` 在访问 JSP 文件的时候不会被调用，因为 Servlet 容器中 url-pattern 为 `*.jsp` 的内置 Servlet 会被调用，其优先级大于默认路径。
+
+---
 
 注：
 
