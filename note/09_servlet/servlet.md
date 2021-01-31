@@ -27,6 +27,15 @@ public interface Servlet {
 
 实现`Servlet`接口可以编写扩展`javax.servlet.GenericServlet`的通用servlet或扩展`javax.servlet.http.HttpServlet`的HTTP servlet。
 
+## Servlet 元素结构
+
+参考：[Servlet 4.0 164页](https://download.oracle.com/otn-pub/jcp/servlet-4-final-eval-spec/servlet-4_0_FINAL.pdf)
+
+![Servlet元素结构](Servlet元素结构.png)
+
+
+元素 `load-onstartup` 表示应该在 Web 应用程序启动时加载(实例化并调用它的init())这个 Servlet。该元素的元素内容必须是一个整数，指示 Servlet 应该以何种顺序加载。如果值是一个负整数，或者元素不存在，容器可以随时加载 Servlet。如果该值为正整数或0，则容器必须在部署应用程序时加载并初始化 Servlet。容器必须保证标记为小整数的 Servlet 在标记为大整数的 Servlet 之前加载。容器可以选择以相同的启动时加载值加载 Servlet的顺序。
+
 ## Servlet 继承体系
 
 `interface Servlet` <---implements---- `abstract class GenericServlet` <---extends---- `abstract class HttpServlet` <---extends---- `class MyServlet`

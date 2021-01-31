@@ -81,7 +81,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 使用 `jQuery.extend()` 为 `jQuery` 增加静态属性, 该属性可以通过 `jQuery.attribute` 或者 `$.attribute` 直接访问; 使用 `jQuery.fn.extend()` 为 `jQuery.fn` 增加实例属性, 该属性可以通过 `jQuery` 所创加的实例来访问, 如 `$(document).attribe`.
 
-jQuery对象底层实际上就是`jQuery.fn.init`的对象数组, `length`属性记录的是数组的长度, 数组的内容基本都是DOM对象.
+jQuery对象底层实际上就是`jQuery.fn.init`函数构造的对象数组, `length`属性记录的是数组的长度, 数组的内容基本都是DOM对象.
 
 ## 选择器
 

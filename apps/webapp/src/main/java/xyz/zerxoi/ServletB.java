@@ -27,7 +27,7 @@ public class ServletB extends HttpServlet {
     }
 
     protected void handler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("RequestDispatcher 中的请求：" + req);
+        // System.out.println("RequestDispatcher 中的请求：" + req);
         req.setAttribute("foo", "bar");
         req.setCharacterEncoding("UTF-8");
         // include 中的 resp 操作都被忽略

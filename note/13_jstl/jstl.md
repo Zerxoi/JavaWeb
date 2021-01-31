@@ -2,6 +2,12 @@
 
 [JavaServer Pages Standard Tag Library 1.1 Tag Reference](https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/index.html)
 
+[Why there is el-api.jar in Tomcat7 but no jstl libs?](https://stackoverflow.com/questions/9026873/why-there-is-el-api-jar-in-tomcat7-but-no-jstl-libs)
+
+Tomcat 服务器有 EL 表达式的 Jar 包，所以在JSP中不需要引入额外依赖就可以使用 EL 表达式；没有 JSTL 相关的 Jar 包，所以如果要使用 JSTL 需要添加相关依赖。
+
+JSTL的依赖可以使用 [taglibs-standard-spec](https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec) 和 [taglibs-standard-impl](https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl)。Apache Standard Taglib 是Java Standard Tag Library（JSTL）规范的开源实现。
+
 JSTL标签库全称是指 JSP Standard Tag Library。JSP标准标签库是一个不断完善的开放源代码的JSP标签库。
 
 EL表达式主要是为了替换JSP中的表达式脚本，而标签库而是为了替换代码脚本。这样使得整个JSP页面变得更加简洁。

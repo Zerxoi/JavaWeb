@@ -353,7 +353,9 @@ JSP Request: org.apache.catalina.connector.RequestFacade@64bc442c
 <url-pattern>/</url-pattern>
 ```
 
-在**Servlet 容器中没有匹配的内置 Servlet**或者**没有注册与之匹配的 Servlet**的时候，默尔维尼路径的 Servlet 会被调用。需要注意的是默认路劲 `/` 的 `Servlet` 在访问 JSP 文件的时候不会被调用，因为 Servlet 容器中 url-pattern 为 `*.jsp` 的内置 Servlet 会被调用，其优先级大于默认路径。
+参考：[Difference between / and /* in servlet mapping url pattern](https://stackoverflow.com/questions/4140448/difference-between-and-in-servlet-mapping-url-pattern)
+
+在**Servlet 容器中没有匹配的内置 Servlet**或者**没有注册与之匹配的 Servlet**的时候，默尔路径的 Servlet 会被调用。需要注意的是默认路径 `/` 的 `Servlet` 在访问 JSP 文件的时候不会被调用，因为 Servlet 容器中 url-pattern 为 `*.jsp` 的内置 Servlet 会被调用，其优先级大于默认路径。
 
 `<url-pattern>/*</url-pattern>`会将所有请求都发送到手动注册的 `Servlet` 程序中，但是如果访问 `*.html` 页面并不需要手动注册的 Servlet程序、访问 `*.jsp` 需要使用容器内置的 Servlet 而不是手动注册的 Servlet。所以相对于 `/*`，使用 `/` 是更安全的做法。
 
@@ -361,5 +363,130 @@ JSP Request: org.apache.catalina.connector.RequestFacade@64bc442c
 
 注：
 
-1. 一个 `<filter-mapping>` 可以有多个 `<url-pattern>` 元素。
+1. 在Servlet 2.3 的 `web.xml` 配置文件中一个 `<filter-mapping>` 只有一个 `<url-pattern>` 元素，如果一个 `<filter>` 有多个 `<url-pattern>` 则需要创建多个 `<filter-mapping>`
 2. Filter 过滤器只关心请求的地址是否匹配，不关系请求的资源是否存在。
+
+## JavaEE 三大组件的生命周期
+
+创建 Servlet
+
+```java
+public class MyServlet extends HttpServlet {
+    private static final long serialVersionUID = -2345771005431135205L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/plain");
+        PrintWriter out = resp.getWriter();
+        out.println("ServletA");
+        out.close();
+    }
+}
+```
+
+创建 Servlet 的过滤器
+
+```java
+
+public class MyFilter extends HttpFilter {
+    private static final long serialVersionUID = -804262998675257315L;
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("MyFilter Initializing");
+    }
+    @Override
+    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
+        System.out.println("MyFilter doFilter");
+        chain.doFilter(req, res);
+    }
+    @Override
+    public void destroy() {
+        System.out.println("MyFilter Destroying");
+    }
+}
+```
+
+创建 Servlet 上下文的监听器
+
+```java
+public class ServletContextListenerImpl implements ServletContextListener {
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        System.out.println("ServletContextListener Destroy " + sce.getServletContext());
+    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("ServletContextListener Initialize " + sce.getServletContext());
+    }
+}
+```
+创建 Servlet 请求的监听器
+
+```java
+public class ServletRequestListenerImpl implements ServletRequestListener {
+    @Override
+    public void requestDestroyed(ServletRequestEvent sre) {
+        System.out.println("ServletRequestListener Destroy " + sre.getServletRequest());
+    }
+
+    @Override
+    public void requestInitialized(ServletRequestEvent sre) {
+        System.out.println("ServletRequestListener Initialize " + sre.getServletRequest());
+    }
+}
+```
+
+`web.xml` 配置文件如下
+
+```xml
+<filter>
+    <filter-name>myFilter</filter-name>
+    <filter-class>xyz.zerxoi.filter.MyFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>myFilter</filter-name>
+    <url-pattern>/myServlet</url-pattern>
+</filter-mapping>
+
+<listener>
+    <listener-class>xyz.zerxoi.listener.ServletContextListenerImpl</listener-class>
+</listener>
+<listener>
+    <listener-class>xyz.zerxoi.listener.ServletRequestListenerImpl</listener-class>
+</listener>
+
+<servlet>
+    <servlet-name>myServlet</servlet-name>
+    <servlet-class>xyz.zerxoi.MyServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>myServlet</servlet-name>
+    <url-pattern>/myServlet</url-pattern>
+</servlet-mapping>
+```
+在 Web 项目启动后，由 Tomcat 日志可知 `ServletContextListener` 先创建，`MyFilter` 后创建。
+
+```log
+[apache-tomcat-9.0.41]: ServletContextListener Initialize org.apache.catalina.core.ApplicationContextFacade@6326d182
+[apache-tomcat-9.0.41]: MyFilter Initializing
+```
+
+当使用浏览器访问 `/myServlet` 时，会向服务器发出请求并创建 `ServletRequestListener`，之后 `MyFilter` 对请求进行过滤，在请求响应完后销毁 `ServletRequestListener`。
+
+```log
+[apache-tomcat-9.0.41]: ServletRequestListener Initialize org.apache.catalina.connector.RequestFacade@35721998
+[apache-tomcat-9.0.41]: MyFilter doFilter
+[apache-tomcat-9.0.41]: ServletRequestListener Destroy org.apache.catalina.connector.RequestFacade@35721998
+```
+
+关闭 Tomcat 服务器时会一次销毁 `MyFilter` 和 `ServletContextListener`。
+
+```log
+[apache-tomcat-9.0.41]: MyFilter Destroying
+[apache-tomcat-9.0.41]: ServletContextListener Destroy org.apache.catalina.core.
+```

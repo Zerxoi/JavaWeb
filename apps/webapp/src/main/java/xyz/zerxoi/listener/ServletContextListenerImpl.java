@@ -1,4 +1,4 @@
-package xyz.zerxoi;
+package xyz.zerxoi.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -7,12 +7,12 @@ public class ServletContextListenerImpl implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("ServletContext 销毁");
+        System.out.println("ServletContextListener Destroy " + sce.getServletContext());
     }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("ServletContext 初始化");
+        System.out.println("ServletContextListener Initialize " + sce.getServletContext());
     }
     
 }

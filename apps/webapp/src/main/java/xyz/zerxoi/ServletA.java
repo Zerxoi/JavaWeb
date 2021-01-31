@@ -34,7 +34,7 @@ public class ServletA extends HttpServlet {
         // out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         // out.flush();
         // resp.setStatus(404);
-        System.out.println("请求调度前的请求属性foo的值：" + req.getAttribute("foo"));
+        System.out.println("请求调度后的请求属性foo的值：" + req.getAttribute("foo"));
         out.close();
     }
 

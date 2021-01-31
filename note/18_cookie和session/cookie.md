@@ -169,9 +169,9 @@ protected void life3600(HttpServletRequest req, HttpServletResponse resp) throws
 ## 限制访问 Cookie
 
 - `Secure` 属性：标记为 Secure 的 Cookie 只应通过被 **HTTPS** 协议加密过的请求发送给服务端。
-    - Java 中通过 `cookie.setHttpOnly(true)`设置 `Secure` 属性
+    - Java 中通过 `cookie.setSecure(true)`设置 `Secure` 属性
 - `HttpOnly` 属性：JavaScript `Document.cookie` API 无法访问带有 `HttpOnly` 属性的cookie；此类 Cookie 仅作用于服务器。
-    - Java 中通过 `cookie.setSecure(true)` 设置 `HttpOnly` 属性
+    - Java 中通过 `cookie.setHttpOnly(true)` 设置 `HttpOnly` 属性
 
 示例
 

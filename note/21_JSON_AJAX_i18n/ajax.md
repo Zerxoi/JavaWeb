@@ -86,15 +86,15 @@ function ajaxRequest() {
 - `settings`：一组配置Ajax请求的键/值对。所有的设置都是可选的。可以使用 `$.ajaxSetup()` 为任何选项设置一个默认值。
     - `method`：请求方法。默认是`GET`。1.9.0之前的jQuery版本，则应使用`type`
     - `url`：请求的URL地址
-    - `async`：是否是异步请求
+    - `async`：是否是异步请求（默认为`true`）
     - `contentType`：告诉服务器请求数据的数据类型，默认是`application/x-www-form-urlencoded; charset=UTF-8`
     - `data`：发送到服务器的数据。如果HTTP方法是不能具有实体主体（例如GET）的方法，则数据将附加到URL。当数据是对象时，除非将`processData`选项设置为`false`，否则jQuery会根据对象的键/值对生成数据字符串。
     - `accepts`：一组键/值对对象，该对象为`dataType`提供映射，`dataType`中指定的数据类型会在`Accept`请求头中发送。`Accept`请求头告诉服务器可以发送回的数据类型
-    - `dataFilter`：用于处`XMLHttpRequest`的原始响应数据的函数。 这是一个预过滤函数，返回清理后的响应数据。 该函数接受两个参数：服务器返回的原始数据和`dataType`参数。
-    - `dataType`：期望从服务器返回的数据类型。如果未指定任何内容，则jQuery将尝试根据响应的MIME类型进行推断。`dataType`会对请求的响应将由jQuery预处理，处理后的结果会传递到`success`回调函数
-    - `success`：请求成功时要调用的函数。该函数将传递3个参数：从服务器返回的由`dataFilter`回调函数过滤和`dataType`参数预处理的数据，描述状态的字符串 和 `jqXHR`
+    - `dataFilter`：用于处理`XMLHttpRequest`的原始响应数据的函数。 这是一个预过滤函数，返回清理后的响应数据。 该函数接受两个参数：服务器返回的原始数据和`dataType`参数。
+    - `dataType`：期望从服务器返回的数据类型。如果未指定任何内容，则jQuery将尝试根据响应的MIME类型进行推断。`dataType`会对请求的响应将由jQuery预处理，处理后的结果会传递到`success`回调函数。可处理的数据类型有 `xml`、 `json`、`script`、`html` 等
+    - `success`：请求成功时要调用的函数。该函数将传递3个参数：**从服务器返回的由`dataFilter`回调函数过滤和`dataType`参数预处理的数据**，**描述状态的字符串** 和 **`jqXHR`**
 
-`jQuery.get( url [, data ] [, success ] [, dataType ] )` 和 `jQuery.post( url [, data ] [, success ] [, dataType ] )` 等都是对 `jQuery.ajax( url [, settings ] )` 的封装，使用方法类似。
+`jQuery.get( url [, data ] [, success ] [, dataType ] )` 、 `jQuery.post( url [, data ] [, success ] [, dataType ] )` 、`jQuery.getJSON( url [, data ] [, success ] )` 等都是对 `jQuery.ajax` 的封装，使用方法类似。
 
 ### `.serialize()`
 
